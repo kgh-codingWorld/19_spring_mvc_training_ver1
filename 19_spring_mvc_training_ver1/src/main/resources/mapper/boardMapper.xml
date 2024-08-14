@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 인터페이스(패키지명.인터페이스명)와 매핑 -->
+<mapper namespace="com.application.trainingVer1.board.dao.BoardDAO">
+
+	<!-- DAO에서 전달받은 BoardDTO객체로 BOARD 테이블에 insert 한다. -->
+	<insert id="createBoard" parameterType="BoardDTO">
+		INSERT INTO BOARD (
+			PASSWD,
+			WRITER,
+			SUBJECT,
+			CONTENT
+		)
+		VALUES (
+			#{passwd},
+			#{writer},
+			#{subject},
+			#{content}
+		)
+	</insert>
+	<!-- 게시글을 전체조회하여 DAO로 전달(return)한다. -->
+	<select id="getBoardList" resultType="BoardDTO"> <!-- select문에서는 무조건 resultType을 사용한다. -->
+		SELECT	*
+		FROM	BOARD
+	</select>
+
+	<!-- 1개의 게시글을 조회하여 DAO로 전달(return)한다. -->
+	<select id="getBoardDetail" parameterType="long" resultType="BoardDTO">
+		SELECT	*
+		FROM	BOARD
+		WHERE	BOARD_ID = #{boardId}
+	</select>
+	
+	<!-- DAO에서 전달받은 boardId로 1개의 Board테이블을 update한다. -->
+	<update id="updateReadCnt" parameterType="long">
+		UPDATE 	BOARD
+		SET		READ_CNT = READ_CNT + 1
+		WHERE	BOARD_ID = #{boardId}
+	</update>
+
+	<!-- 암호화된 비밀번호를 조회하여 DAO로 전달(return)한다. -->
+
+	<!-- DAO에서 전달받은 BoardDTO객체로 BOARD 테이블을 update 한다. -->
+
+	<!-- DAO에서 전달받은 boardId로 BOARD 테이블에서 1개의 게시글을 delete한다. -->
+
+</mapper>
