@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Authentication</title>
+</head>
+<body>
+
+	<div align="center"> 
+		<h3>사용자 인증</h3>
+		<form th:action="@{/board/authentication}" method="post">
+			<table border="1">
+				<tr>
+					<td>작성자</td>
+					<td th:text="${boardDTO.writer}"></td>
+				</tr>
+				<tr>
+					<td>작성일</td>
+					<td th:text="${#dates.format(boardDTO.enrollAt , 'yyyy-MM-dd')}"></td>
+				</tr>
+				<tr>
+					<td>제목</td>
+					<td th:text="${boardDTO.subject}"></td>
+				</tr>
+				<tr>
+					<td>패스워드</td>
+					<td><input type="password" name="passwd"/></td>
+				</tr>
+			</table>
+			<p>
+				<input type="hidden" name="boardId" th:value="${boardDTO.boardId}" />
+				<input type="hidden" name="menu" th:value="${menu}" />
+				<input type="submit" value="인증" />
+				<input type="button" value="목록보기" th:onclick="|location.href='@{/board/boardList}'|"/>
+			</p>
+		</form>
+	</div>
+
+</body>
+</html>

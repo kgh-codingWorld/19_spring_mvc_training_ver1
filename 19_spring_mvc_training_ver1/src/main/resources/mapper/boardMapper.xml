@@ -19,30 +19,49 @@
 			#{content}
 		)
 	</insert>
-	<!-- 게시글을 전체조회하여 DAO로 전달(return)한다. -->
-	<select id="getBoardList" resultType="BoardDTO"> <!-- select문에서는 무조건 resultType을 사용한다. -->
-		SELECT	*
-		FROM	BOARD
-	</select>
 
-	<!-- 1개의 게시글을 조회하여 DAO로 전달(return)한다. -->
-	<select id="getBoardDetail" parameterType="long" resultType="BoardDTO">
-		SELECT	*
-		FROM	BOARD
-		WHERE	BOARD_ID = #{boardId}
+	<!-- 게시글을 전체조회하여 DAO로 전달(return)한다. -->
+	<select id="getBoardList" resultType="BoardDTO">
+		SELECT *
+		FROM   BOARD
 	</select>
 	
+	<!-- 1개의 게시글을 조회하여 DAO로 전달(return)한다. -->
+	<select id="getBoardDetail" parameterType="long" resultType="BoardDTO">
+		SELECT *
+		FROM   BOARD
+		WHERE  BOARD_ID = #{boardId}
+	</select>
+
 	<!-- DAO에서 전달받은 boardId로 1개의 Board테이블을 update한다. -->
 	<update id="updateReadCnt" parameterType="long">
-		UPDATE 	BOARD
-		SET		READ_CNT = READ_CNT + 1
-		WHERE	BOARD_ID = #{boardId}
+		UPDATE BOARD
+		SET    READ_CNT = READ_CNT + 1
+		WHERE  BOARD_ID = #{boardId}
 	</update>
 
+
 	<!-- 암호화된 비밀번호를 조회하여 DAO로 전달(return)한다. -->
+	<select id="getPasswd" parameterType="long" resultType="String">
+		SELECT PASSWD
+		FROM   BOARD
+		WHERE  BOARD_ID = #{boardId}
+	</select>
 
 	<!-- DAO에서 전달받은 BoardDTO객체로 BOARD 테이블을 update 한다. -->
+	<update id="updateBoard" parameterType="BoardDTO">
+		UPDATE BOARD
+		SET    SUBJECT = #{subject},
+			   CONTENT = #{content}
+		WHERE  BOARD_ID = #{boardId}
+	</update>
 
 	<!-- DAO에서 전달받은 boardId로 BOARD 테이블에서 1개의 게시글을 delete한다. -->
+	<delete id="deleteBoard" parameterType="long">
+		DELETE FROM BOARD
+		WHERE  		BOARD_ID = #{boardId}
+	</delete>
+
+
 
 </mapper>

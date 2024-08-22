@@ -31,9 +31,9 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="button" value="수정">
-					<input type="button" value="삭제">
-					<input type="button" value="목록보기">
+					<input type="button" value="수정" th:onclick="|location.href='@{/board/authentication(boardId=${boardDTO.boardId} , menu=update)}'|">
+					<input type="button" value="삭제" th:onclick="|location.href='@{/board/authentication(boardId=${boardDTO.boardId} , menu=delete)}'|">
+					<input type="button" value="목록보기" th:onclick="|location.href='@{/board/boardList}'|">
 				</td>
 			</tr>
 		</table>
